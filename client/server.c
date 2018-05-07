@@ -11,6 +11,16 @@ int try_connect(char *unique_str) {
 }
 
 
+int send_to_server(server_t* server, char cmd){
+    client_msg msg = {
+            .msg_type  = ACTION,
+            .payload.client_action.action= cmd
+    };
+    int i = msgsnd(server->to_server_msg_id, &msg, sizeof(msg), 0);
+    return i == sizeof(msg);
+}
+
+
 server_t login(char id, pid_t pid) {
     int login_q = try_connect(SERVER_LOGIN);
     if(login_q >= 0){

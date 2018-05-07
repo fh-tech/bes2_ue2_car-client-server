@@ -3,6 +3,9 @@ project(car_server_client)
 
 set(CMAKE_C_STANDARD 11)
 
+add_executable(display
+        display/main.c)
+
 add_executable(server
         server/main.c
         shared/client_msg_types.h

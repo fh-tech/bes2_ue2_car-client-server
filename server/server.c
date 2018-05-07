@@ -8,6 +8,9 @@
 #include <malloc.h>
 #include <sys/msg.h>
 #include <memory.h>
+#include <sys/stat.h>
+#include <zconf.h>
+
 #include "server.h"
 
 #include "../shared/client_msg_types.h"
@@ -18,10 +21,21 @@ int try_connect(char* unique_str){
     return msgget(file_key, 0644 | IPC_CREAT);
 }
 
+int make_fifo(){
+    int pipe = mkfifo(SERVER_DISPLAY, 0666);
+    printf("created fifo: %d\n", pipe);
+    int fd = open(SERVER_DISPLAY, O_WRONLY);
+    printf("opened fifo: %d\n", fd);
+    return fd;
+}
+
 server_t *init_server(server_t *server, void (*free)(void *)) {
 
     server->width = 0;
     server->height = 0;
+
+    //blocking
+    make_fifo();
 
     memset(&(server->clients), 0 ,sizeof(server->clients));
 
@@ -42,7 +56,7 @@ server_t *init_server(server_t *server, void (*free)(void *)) {
 
 
 int free_server(server_t *server, void (*free)(void *)) {
-
+    unlink(SERVER_DISPLAY);
     remove(SERVER_LOGIN);
     msgctl(server->login_queue_id, IPC_RMID, NULL);
 

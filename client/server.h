@@ -24,7 +24,8 @@ typedef struct {
 
 server_t login(char id, pid_t pid);
 
-
 int try_connect(char* unique_str);
+
+int send_to_server(server_t* server, char cmd);
 
 #endif //CAR_SERVER_CLIENT_SERVER_H

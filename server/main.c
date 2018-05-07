@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <zconf.h>
+#include <sys/stat.h>
 
 #include "../shared/client_msg_types.h"
 #include "server.h"

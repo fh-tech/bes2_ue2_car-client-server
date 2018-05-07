@@ -11,13 +11,15 @@
 #include "server.h"
 
 
-int main(){
-    char id = 'A';
-
-    perror("");
-
+int main() {
+    char id = 'B';
     server_t server = login(id, getpid());
+    char cmd = '\0';
+    while (cmd != 't') {
+        scanf(" %c", &cmd);
 
-
-    perror("");
+        if(cmd != 't') {
+            send_to_server(&server, cmd);
+        }
+    }
 }
