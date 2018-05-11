@@ -19,8 +19,9 @@ void sig_handle(int signal){
 
 int main() {
 
-    signal(15, sig_handle);
-    signal(9, sig_handle);
+    signal(SIGTERM, sig_handle);
+    signal(SIGKILL, sig_handle);
+    signal(SIGINT, sig_handle);
 
     server_t *server = init_server(malloc(sizeof(*server)), free);
     while (run){
