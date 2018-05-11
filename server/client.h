@@ -5,6 +5,8 @@
 #ifndef CAR_SERVER_CLIENT_CLIENT_H
 #define CAR_SERVER_CLIENT_CLIENT_H
 
+#include <signal.h>
+
 typedef struct {
     char id;
     pid_t pid;

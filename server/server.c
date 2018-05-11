@@ -16,7 +16,7 @@
 #include "../shared/client_msg_types.h"
 
 int try_connect(char* unique_str){
-    int tmp_file = open(unique_str, O_CREAT, 0666);
+    open(unique_str, O_CREAT, 0666);
     key_t file_key = ftok(unique_str, QUEUE_MSG_KEY);
     return msgget(file_key, 0644 | IPC_CREAT);
 }
@@ -44,18 +44,18 @@ server_t *init_server(server_t *server, void (*free)(void *)) {
     if(login_queue_id != -1){
 
         server->login_queue_id = login_queue_id;
+        return server;
 
     }else{
         free_server(server, free);
         return NULL;
     }
 
-
 }
 
 
 
-int free_server(server_t *server, void (*free)(void *)) {
+void free_server(server_t *server, void (*free)(void *)) {
     unlink(SERVER_DISPLAY);
     remove(SERVER_LOGIN);
     msgctl(server->login_queue_id, IPC_RMID, NULL);
@@ -71,8 +71,7 @@ int free_server(server_t *server, void (*free)(void *)) {
 }
 
 int send_to_client(server_t *server, client_msg msg) {
-    char buf[] = "Hello World";
-    return msgsnd(server->login_queue_id, &buf, sizeof(buf), 0 ) != -1;
+    return msgsnd(server->login_queue_id, &msg, sizeof(msg), 0 ) != -1;
 
 }
 

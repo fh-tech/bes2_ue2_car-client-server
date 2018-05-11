@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -Wpedantic -g
+CFLAGS=-Wall -Wextra -Wpedantic -g -Wno-unused-variable -Wno-unused-parameter
 DEPS=. ../shared/*.h
 OBS=main.o server.o
 

@@ -56,6 +56,8 @@ server_t login(char id, pid_t pid) {
             exit(1);
         }
     }
-
-
+    return (server_t) {
+            .to_server_msg_id=-1,
+            .from_server_msg_id= -1
+    };
 }

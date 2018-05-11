@@ -9,13 +9,19 @@
 #include "../shared/client_msg_types.h"
 #include "server.h"
 
+int run = 1;
+
+void sig_handle(int signal){
+    printf("Requesting shutdown with signal: %d", signal);
+    run = 0;
+}
+
 
 int main() {
     server_t *server = init_server(malloc(sizeof(*server)), free);
 
-    #pragma clang diagnostic push
-    #pragma clang diagnostic ignored "-Wmissing-noreturn"
-    while (1){
+
+    while (run){
         while(waiting_messages(server->login_queue_id) > 0){
             client_msg msg;
             msgrcv(server->login_queue_id, &msg, sizeof(msg), 0, 0);
@@ -30,8 +36,6 @@ int main() {
             }
         }
     }
-    #pragma clang diagnostic pop
-
-
     free_server(server, free);
+    return 0;
 }

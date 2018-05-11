@@ -7,6 +7,7 @@
 
 #include <sys/types.h>
 #include <stdlib.h>
+#include <sys/msg.h>
 #include "client.h"
 #include "../shared/client_msg_types.h"
 
@@ -27,7 +28,7 @@ typedef struct server_s {
 
 server_t* init_server(server_t *server, void (*free)(void *));
 
-int free_server(server_t* server, void(*free)(void*));
+void free_server(server_t* server, void(*free)(void*));
 
 int send_to_client(server_t* server, client_msg msg);
 
