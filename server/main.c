@@ -37,6 +37,7 @@ int main() {
                     break;
             }
         }
+        usleep(10000);
     }
     printf("Shutting down...\n");
     free_server(server, free);

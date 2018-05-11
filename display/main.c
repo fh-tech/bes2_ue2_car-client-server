@@ -10,7 +10,9 @@ int main(){
     //mkfifo(SERVER_DISPLAY, 0666);
     int fd = open(SERVER_DISPLAY, O_RDONLY);
     printf("opend pipe %s: %d\n", SERVER_DISPLAY, fd);
-    while (1);
+
+    char c;
+    scanf(" %c", &c);
 
     return 0;
 }
