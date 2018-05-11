@@ -11,15 +11,23 @@
 #include "server.h"
 
 
-int main() {
-    char id = 'B';
-    server_t server = login(id, getpid());
-    char cmd = '\0';
-    while (cmd != 't') {
-        scanf(" %c", &cmd);
+int main(int argc, char** argv) {
+    char id = '\0';
 
-        if(cmd != 't') {
-            send_to_server(&server, cmd);
+    if(argc == 2){
+        id = *argv[1];
+        printf("Creating client with id: %c\n", id);
+
+        server_t server = login(id, getpid());
+        char cmd = '\0';
+        while (cmd != 't') {
+            scanf(" %c", &cmd);
+
+            if(cmd != 't') {
+                send_to_server(&server, cmd);
+            }
         }
     }
+
+
 }
