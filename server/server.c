@@ -63,7 +63,7 @@ void free_server(server_t *server, void (*free)(void *)) {
     if(free) {
         for(int i = 0; i < 26; i++) {
             if(server->clients[i]){
-                free(&(server->clients[i]));
+                free_client(server->clients[i]);
             }
         }
         free(server);

@@ -5,7 +5,9 @@
 #ifndef CAR_SERVER_CLIENT_CLIENT_H
 #define CAR_SERVER_CLIENT_CLIENT_H
 
+#include <stdlib.h>
 #include <signal.h>
+#include <sys/msg.h>
 
 typedef struct {
     char id;
@@ -20,6 +22,8 @@ typedef struct {
     int x;
     int y;
 } client;
+
+void free_client(client* c);
 
 
 #endif //CAR_SERVER_CLIENT_CLIENT_H

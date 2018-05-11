@@ -11,7 +11,7 @@ add_executable(server
         shared/client_msg_types.h
         server/server.h
         server/client.h
-        server/server.c)
+        server/server.c server/client.c)
 
 add_executable(client
         client/main.c
