@@ -12,15 +12,17 @@
 int run = 1;
 
 void sig_handle(int signal){
-    printf("Requesting shutdown with signal: %d", signal);
+    printf("Requesting shutdown with signal: %d\n", signal);
     run = 0;
 }
 
 
 int main() {
+
+    signal(15, sig_handle);
+    signal(9, sig_handle);
+
     server_t *server = init_server(malloc(sizeof(*server)), free);
-
-
     while (run){
         while(waiting_messages(server->login_queue_id) > 0){
             client_msg msg;
@@ -36,6 +38,7 @@ int main() {
             }
         }
     }
+    printf("Shutting down...\n");
     free_server(server, free);
     return 0;
 }
