@@ -7,10 +7,9 @@
 #include <stdlib.h>
 #include <memory.h>
 #include <zconf.h>
-#include <messages.h>
 
 #include "server.h"
-#include "../shared/messages.h"
+#include "messages.h"
 
 client_t *get_client(server_t* server, char id) {
     assert(id >= 'A' && id <= 'Z');

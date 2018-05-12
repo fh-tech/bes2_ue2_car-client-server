@@ -6,7 +6,7 @@
 #include <signal.h>
 #include <zconf.h>
 #include <time.h>
-#include "../shared/messages.h"
+#include "messages.h"
 #include "server.h"
 
 static int run = 1;

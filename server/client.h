@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <memory.h>
-#include "../shared/messages.h"
+#include "messages.h"
 
 typedef struct client_s
 {
