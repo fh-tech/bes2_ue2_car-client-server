@@ -1,41 +1,58 @@
 //
-// Created by daniel on 02.05.18.
+// Created by daniel on 11.05.18.
 //
 
-#ifndef CAR_SERVER_CLIENT_SERVER_H
-#define CAR_SERVER_CLIENT_SERVER_H
+#ifndef CAR_CLIENT_SERVER2_SERVER_H
+#define CAR_CLIENT_SERVER2_SERVER_H
 
-#include <sys/types.h>
-#include <stdlib.h>
-#include <sys/msg.h>
+#include "messages.h"
 #include "client.h"
-#include "../shared/client_msg_types.h"
 
-
+#define MAX_CLIENTS 26
 
 typedef struct server_s {
-
-    client *clients[26];
-    u_int8_t last_client;
-
-    int login_queue_id;
+    int login_mqid;
+    int display_pipe_fd;
 
     int width;
     int height;
 
+    char* field;
+
+    client_t *clients[MAX_CLIENTS];
+
 } server_t;
 
+typedef struct{
+    int x, y;
+} pos;
 
-server_t* init_server(server_t *server, void (*free)(void *));
+pos generate_new_pos(server_t* server);
 
-void free_server(server_t* server, void(*free)(void*));
+char get_client_at_pos(server_t* server, int x, int y);
 
-int send_to_client(server_t* server, client_msg msg);
+void set_client_at_pos(server_t* server, int x, int y, client_t* client);
 
-const char* display_state(server_t *server);
+void set_at_pos(server_t *server, int x, int y, char symbol);
 
-void login_client(server_t* server, char id, pid_t pid);
+server_t *new_server(int width, int height);
 
-msgqnum_t waiting_messages(int mesg_id);
+void free_server(server_t *server);
 
-#endif //CAR_SERVER_CLIENT_SERVER_H
+void handle_login(server_t *server);
+
+void logout(server_t* server, client_t* client);
+
+void client_action(server_t *server, client_t* client, char action);
+
+void handle_client(server_t* server, client_t* client);
+
+void handle_clients(server_t* server);
+
+void set_client(server_t *server, client_t *client);
+
+client_t *get_client(server_t *server, char id);
+
+void update_display(server_t* server);
+
+#endif //CAR_CLIENT_SERVER2_SERVER_H

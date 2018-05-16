@@ -1,18 +1,26 @@
 CC=gcc
-CFLAGS=-Wall -Wextra -Wpedantic -g -Wno-unused-variable -Wno-unused-parameter
-DEPS=. ../shared/*.h
-OBS=main.o server.o client.o
+CFLAGS=-Wall -Wextra -g
+INCLUDE= -I../shared
+DEPS= client.h server.h ../shared/messages.h
 
-all: server
-
-server: $(OBS)
-	$(CC) $(CFLAGS) -I$(DEPS) $^ -o server
+server: main.o client.o server.o ../build/messagelib.a
+	$(CC) $^ -o server
 
 main.o: main.c $(DEPS)
-server.o: server.c $(DEPS)
+	$(CC) -c $^ $(INCLUDE)
+
 client.o: client.c $(DEPS)
+	$(CC) -c $^ $(INCLUDE)
+
+server.o: server.c $(DEPS)
+	$(CC) -c $^ $(INCLUDE)
+
+
+../build/messagelib.a: ../shared/*
+	cd ../shared/ && make all && make clean
+	cd ../shared/ && mv messagelib.a ../build
 
 clean:
-	rm *.o
+	rm -f *.o *.gch
 
-.PHONY: all
+.PHONY: server clean

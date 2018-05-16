@@ -1,17 +1,19 @@
-BUILD_DIR=build
-
 all: server client display
 
 server:
-	cd ./server && make -b all && make clean
-	mv server/server ./$(BUILD_DIR)
+	cd server && make server && make clean
+	cd server && mv server ../build
 
 client:
-	cd ./client && make -b all && make clean
-	mv client/client ./$(BUILD_DIR)
+	cd client && make client && make clean
+	cd client && mv client ../build
 
 display:
-	cd ./display && make -b all && make clean
-	mv display/display ./$(BUILD_DIR)
+	cd display && make display && make clean
+	cd display && mv display ../build
 
-.PHONY: server client display
+clean:
+	rm -f build/*
+
+.PHONY: server client display clean
+

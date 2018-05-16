@@ -1,29 +1,33 @@
 //
-// Created by daniel on 02.05.18.
+// Created by daniel on 11.05.18.
 //
 
-#ifndef CAR_SERVER_CLIENT_CLIENT_H
-#define CAR_SERVER_CLIENT_CLIENT_H
+#ifndef CAR_CLIENT_SERVER2_CLIENT_H
+#define CAR_CLIENT_SERVER2_CLIENT_H
 
-#include <stdlib.h>
+#include <sys/types.h>
 #include <signal.h>
-#include <sys/msg.h>
+#include <memory.h>
+#include "messages.h"
 
-typedef struct {
-    char id;
+typedef struct client_s
+{
     pid_t pid;
-    int to_client_msg_q;
-    int from_client_msg_q;
+    char id;
 
-    enum DIR {
-        N, E, S, W
-    } dir;
+    int to_client_mqid;
+    int from_client_mqid;
 
-    int x;
-    int y;
-} client;
+    int pos_x;
+    int pos_y;
+}
+client_t;
 
-void free_client(client* c);
+void free_client(client_t* client);
+
+client_t* new_client(pid_t pid, char id, int x, int y);
 
 
-#endif //CAR_SERVER_CLIENT_CLIENT_H
+
+
+#endif //CAR_CLIENT_SERVER2_CLIENT_H

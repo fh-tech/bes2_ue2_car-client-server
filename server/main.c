@@ -1,46 +1,37 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/msg.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <zconf.h>
-#include <sys/stat.h>
+//
+// Created by daniel on 11.05.18.
+//
 
-#include "../shared/client_msg_types.h"
+#include <stdio.h>
+#include <signal.h>
+#include <zconf.h>
+#include <time.h>
+#include "messages.h"
 #include "server.h"
 
-int run = 1;
+static int run = 1;
 
-void sig_handle(int signal){
-    printf("Requesting shutdown with signal: %d\n", signal);
+void signal_handler(int sig){
+    printf("Requesting shutdown with signal: %d", sig);
     run = 0;
 }
 
+int main(){
+    srand(time(NULL));
+    signal(15, signal_handler);
+    signal(2, signal_handler);
 
-int main() {
+    int width = 10, height = 10;
 
-    signal(SIGTERM, sig_handle);
-    signal(SIGKILL, sig_handle);
-    signal(SIGINT, sig_handle);
+    server_t* server = new_server(width, height);
 
-    server_t *server = init_server(malloc(sizeof(*server)), free);
     while (run){
-        while(waiting_messages(server->login_queue_id) > 0){
-            client_msg msg;
-            msgrcv(server->login_queue_id, &msg, sizeof(msg), 0, 0);
-            switch (msg.msg_type){
-                case LOGIN:
-                    printf("Login request: id=%c, pid=%d\n", msg.payload.login_msg.client_id, msg.payload.login_msg.client_pid);
-                    login_client(server, msg.payload.login_msg.client_id, msg.payload.login_msg.client_pid);
-                    break;
-                default:
-                    printf("Malformed message %d\n", msg.msg_type);
-                    break;
-            }
-        }
-        usleep(10000);
+        handle_login(server);
+        handle_clients(server);
+
+        usleep(100000);
     }
-    printf("Shutting down...\n");
-    free_server(server, free);
-    return 0;
+
+
+    free_server(server);
 }
