@@ -22,10 +22,10 @@ int main(){
 
         if(i == 0) break;
 
-        if(clear){
-            clear = 0;
-            system("clear");
-        }
+//        if(clear){
+//            clear = 0;
+//            system("clear");
+//        }
 
         printf(buf);
         if(i != BUF_SIZE){

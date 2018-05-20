@@ -99,6 +99,7 @@ void login_client(server_t* server, login_message_t message){
 
 void handle_login(server_t* server){
     msg_wrap msg;
+    //TODO: pollt er da nicht durchgehend?
     while (receive_from_mq_non_block(server->login_mqid, &msg)){
         switch (msg.msg_type) {
             case LOGIN:
