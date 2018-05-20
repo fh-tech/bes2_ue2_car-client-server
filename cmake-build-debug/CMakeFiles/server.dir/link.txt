@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/server.dir/server/main.c.o CMakeFiles/server.dir/server/server.c.o CMakeFiles/server.dir/server/client.c.o  -o server libmessages.a 

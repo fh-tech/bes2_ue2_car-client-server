@@ -12,13 +12,6 @@
 
 
 static int run = 1;
-/**
-* prints usage information
-*/
-void print_usage(char *program_name) {
-    fprintf(stderr, "Usage: %s -x NUM -y NUM\n", program_name);
-    exit(EXIT_FAILURE);
-}
 
 /**
  * handles SIGINT and SIGTERM
@@ -27,6 +20,14 @@ void print_usage(char *program_name) {
 void signal_handler(int sig){
     printf("Requesting shutdown with signal: %d", sig);
     run = 0;
+}
+
+/**
+* prints usage information
+*/
+void print_usage(char *program_name) {
+    fprintf(stderr, "Usage: %s -x NUM -y NUM\n", program_name);
+    exit(EXIT_FAILURE);
 }
 
 int main(int argc, char *argv[]) {
@@ -84,6 +85,7 @@ int main(int argc, char *argv[]) {
     }
 
     ////// original logic ///////
+    // TODO: what for srand?
     srand(time(NULL));
     signal(15, signal_handler);
     signal(2, signal_handler);

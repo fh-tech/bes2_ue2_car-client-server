@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/display.dir/display/main.c.o  -o display libmessages.a 
