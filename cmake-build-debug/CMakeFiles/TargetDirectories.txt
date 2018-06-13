@@ -1,6 +1,6 @@
-/home/vik/Repos/bes2_ue2_car-client-server/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/vik/Repos/bes2_ue2_car-client-server/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/vik/Repos/bes2_ue2_car-client-server/cmake-build-debug/CMakeFiles/messages.dir
-/home/vik/Repos/bes2_ue2_car-client-server/cmake-build-debug/CMakeFiles/client.dir
-/home/vik/Repos/bes2_ue2_car-client-server/cmake-build-debug/CMakeFiles/server.dir
-/home/vik/Repos/bes2_ue2_car-client-server/cmake-build-debug/CMakeFiles/display.dir
+/home/daniel/Files/Programming/C/bes2_ue2_car-client-server/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/daniel/Files/Programming/C/bes2_ue2_car-client-server/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/daniel/Files/Programming/C/bes2_ue2_car-client-server/cmake-build-debug/CMakeFiles/display.dir
+/home/daniel/Files/Programming/C/bes2_ue2_car-client-server/cmake-build-debug/CMakeFiles/messages.dir
+/home/daniel/Files/Programming/C/bes2_ue2_car-client-server/cmake-build-debug/CMakeFiles/server.dir
+/home/daniel/Files/Programming/C/bes2_ue2_car-client-server/cmake-build-debug/CMakeFiles/client.dir
